@@ -7,6 +7,7 @@ package Cliente.Vistas;
 
 import javax.swing.JFileChooser;
 import Cliente.Controladores.Controlador;
+import Modelos.Libro;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -229,6 +230,59 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean validarCampos(){ 
+         
+        if(fieldTitulo.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Titulo");
+            return false;
+        }
+         
+        if(fieldAutor.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Autor");
+            return false;
+        }
+         
+        if (fieldIsbn.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un ISBN");
+            return false;
+        }
+        
+        if(comboCategoria.getSelectedItem() == null)
+        {
+            JOptionPane.showMessageDialog(null,"Debe seleccionar una categoria");
+            return false;
+        }
+            
+        if(fieldPrecio.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Precio");
+            return false;
+        }
+        
+        if(comboCalificacion.getSelectedItem()== null)
+        {
+            JOptionPane.showMessageDialog(null,"Debe seleccionar una calificacion");
+            return false;
+        }
+        
+        if(fieldEdad.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar una Edad");
+            return false;
+        }
+        
+        if(paneResumen.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Resumen");
+            return false;
+        }
+        
+
+        return true;
+    }  
     private void buttonContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonContenidoActionPerformed
      
         JFileChooser fileChooser = new JFileChooser();
@@ -251,19 +305,22 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
         try{
-            String isbn = this.fieldIsbn.getText();
-            String titulo = this.fieldTitulo.getText();
-            String resumen = this.paneResumen.getText();
-            String autor = this.fieldAutor.getText();
-            double precio = Double.parseDouble(this.fieldPrecio.getText());
-            String categoria = (String)this.comboCategoria.getSelectedItem();
-            boolean bestSeller = this.checkBestSeller.isSelected();
-            int edadMinima = Integer.parseInt(this.fieldEdad.getText());
-            int calificacion = Integer.parseInt((String)this.comboCalificacion.getSelectedItem());
-                        
-            //String mensaje = controlador_cliente.agregarLibro(isbn, numeroPaginas, titulo, resumen, autor, portada,
-            //    precio, categoria, bestSeller, edadMinima, calificacion, contenido);
-            //JOptionPane.showMessageDialog(this, mensaje);
+            if(validarCampos())
+            {
+            Libro libro = new Libro();
+            libro.setIsbn(this.fieldIsbn.getText());
+            libro.setTitulo(this.fieldTitulo.getText());
+            libro.setResumen(this.paneResumen.getText());
+            libro.setAutor(this.fieldAutor.getText());
+            libro.setPrecio(Double.parseDouble(this.fieldPrecio.getText()));
+            libro.setCategoria((String)this.comboCategoria.getSelectedItem());
+            libro.setBestSeller(this.checkBestSeller.isSelected());
+            libro.setEdadMinima(Integer.parseInt(this.fieldEdad.getText()));
+            libro.setCalificacion(Integer.parseInt((String)this.comboCalificacion.getSelectedItem()));
+            
+            ArrayList response = controlador_cliente.agregarLibro(libro);
+            JOptionPane.showMessageDialog(this, response);   
+            }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Asegurese de que los campos esten correctamente diligenciados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
