@@ -5,6 +5,7 @@
  */
 package Modelos;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -28,8 +29,8 @@ public class Libro implements Serializable{
     private int calificacion;
     private ArrayList contenido;
     
-    public Libro(String isbn){
-        this.isbn = isbn; 
+    public Libro(){
+       
     }
 
     public Libro(String isbn, int numeroPaginas, String titulo, String resumen, String autor, ImageIcon imagen, double precio, String categoria, boolean bestSeller, int edadMinima, int calificacion, ArrayList contenido) {
@@ -143,4 +144,8 @@ public class Libro implements Serializable{
     public void setContenido(ArrayList contenido) {
         this.contenido = contenido;
     }
+    
+    public String toString(){
+        return "Isbn: "+ getIsbn() + " Titulo: "+ getTitulo(); 
+    } 
 }

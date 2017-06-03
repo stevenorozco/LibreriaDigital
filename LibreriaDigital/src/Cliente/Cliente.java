@@ -5,6 +5,7 @@
  */
 package Cliente;
 
+import Configuraciones.ConfiguracionGlobal;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,10 +20,13 @@ public class Cliente extends Thread{
     Socket socket_cliente; 
     ObjectOutputStream objectOutput; 
     ObjectInputStream objectInput; 
-    String host = "localhost"; 
-    int puerto = 1144; 
+    String host; 
+    int puerto; 
     
     public Cliente(){
+        host = ConfiguracionGlobal.host;
+        puerto = ConfiguracionGlobal.puerto;
+        start();
     }
     
     public void run(){

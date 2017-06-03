@@ -20,9 +20,19 @@ public class Controlador {
 
     public Controlador() {
         this.cliente = new Cliente();
+        //cliente.start();
     }
+    
 
-     public ArrayList agregarLibro(Libro libro) {
+    public ArrayList agregarLibro(Libro libro) {
         return cliente.realizarSolicitudServidor("agregarLibro", libro);
+    }
+    
+    public ArrayList eliminarLibro(String isbn) {
+        return cliente.realizarSolicitudServidor("eliminarLibro", isbn);
+    }
+    
+    public ArrayList consultarLibro(String isbn){
+        return cliente.realizarSolicitudServidor("consultarLibro", isbn);
     }
 }

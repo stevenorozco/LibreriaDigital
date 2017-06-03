@@ -347,9 +347,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonFindBookActionPerformed
 
     private void buttonEditBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditBookActionPerformed
-        InternalEditBook edit = new InternalEditBook(controlador_cliente);
-        this.desktopPane.add(edit);
-        edit.setVisible(true);
+      
     }//GEN-LAST:event_buttonEditBookActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -54,36 +54,82 @@ public class Hilo extends Thread {
                     agregarLibro((Libro) request.get(1));
                     guardarBiblioteca();
                     break;
+                    
+                case "eliminarLibro":
+                    eliminarLibro((String) request.get(1));
+                    guardarBiblioteca();
+                    break;
+                    
+                case "consultarLibro":
+                    consultarLibro((String) request.get(1));
+                    break;
 
                 default:
                     System.out.println("Mensaje desconocido");
                     break;
+                    
             }
         
     }
     
     
     public void agregarLibro(Libro libro) {
-        if (biblioteca.containsKey(libro.getIsbn())) {
-            try {
-                ArrayList resp = new ArrayList();
-                resp.add("El libro con ISBN: " + libro.getIsbn() + " ya existe en la biblioteca");
-                objectOutput.writeObject(resp);
-                objectOutput.flush();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            try {
+        
+        try{
+            ArrayList response = new ArrayList();
+            if (biblioteca.containsKey(libro.getIsbn()))
+                response.add("El libro con ISBN: " + libro.getIsbn() + " ya existe en la biblioteca");
+            else{
                 biblioteca.put(libro.getIsbn(), libro);
-                ArrayList resp = new ArrayList();
-                resp.add("Libro agregado");
-                objectOutput.writeObject(resp);
-                objectOutput.flush();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                response.add("Libro " + libro.getIsbn() +" agregado");
             }
+            //Enviamos respuesta al cliente
+            objectOutput.writeObject(response);
+            objectOutput.flush();
         }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }        
+    }
+    
+    public void eliminarLibro(String isbn) {
+        
+            try{
+            ArrayList response = new ArrayList();
+            if (biblioteca.containsKey(isbn) == false)
+                response.add("El libro con ISBN: " + isbn + " no existe en la biblioteca");
+            else{
+                biblioteca.remove(isbn);
+                response.add("Libro " + isbn +" se ha eliminado");
+            }
+            //Enviamos respuesta al cliente
+            objectOutput.writeObject(response);
+            objectOutput.flush();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }  
+    }
+    public void consultarLibro(String isbn) {
+        Libro libro = (Libro) biblioteca.get(isbn);
+        try{
+            ArrayList response = new ArrayList();
+            if (libro == null){
+                response.add("El libro con ISBN: " + isbn + " no existe en la biblioteca");
+                response.add(null);
+            }
+            else{
+                response.add("Libro encontrado");
+                response.add(libro);
+            }
+            
+            //Enviamos respuesta al cliente
+            objectOutput.writeObject(response);
+            objectOutput.flush();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }  
     }
     
     public void guardarBiblioteca() {

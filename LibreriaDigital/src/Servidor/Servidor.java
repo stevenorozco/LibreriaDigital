@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import Configuraciones.ConfiguracionGlobal;
 /**
  *
  * @author Steven
@@ -17,11 +18,11 @@ public class Servidor extends Thread {
     private ServerSocket servidor; 
     private Socket socket_servidor; 
     
-    public Servidor(int puerto){
+    public Servidor(){
         
         try{
-            this.servidor = new ServerSocket(puerto); 
-            System.out.println("Servidor desde puerto: " + puerto);
+            this.servidor = new ServerSocket(ConfiguracionGlobal.puerto); 
+            System.out.println("Servidor desde puerto: " + ConfiguracionGlobal.puerto);
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -56,7 +57,8 @@ public class Servidor extends Thread {
     
     public static void main(String[] args) throws IOException
     {  
-        Servidor servidor = new Servidor(1144); //Se crea el cliente
+        
+        Servidor servidor = new Servidor(); //Se crea el cliente
         servidor.start(); //Se inicia el cliente
     }
 }
