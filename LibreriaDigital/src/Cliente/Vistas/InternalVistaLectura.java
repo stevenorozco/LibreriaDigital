@@ -10,7 +10,14 @@ import Modelos.Libro;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 
 /**
  *
@@ -37,7 +44,7 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
     public void cargarInformacion(){
         
         ArrayList contenido = new ArrayList();
-        contenido.add("Era lunes y como todos los lunes el alma me pesaba ahí mismo, abajo del saquito\n" +
+        contenido.add(" ra lunes y como todos los lunes el alma me pesaba world ahí mismo, abajo del saquito\n" +
 "\n" +
 "de los cojones. Una tarde pensé que el alma era una tercera bola que llevaba ahí\n" +
 "\n" +
@@ -575,8 +582,10 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
         this.LabelTituloLibro.setText(libro.getTitulo());
         this.TextAreaLibro.setText((String)libro.getContenido().get(0)); 
         
-        
+      
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -607,6 +616,11 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
 
         TextAreaLibro.setColumns(20);
         TextAreaLibro.setRows(5);
+        TextAreaLibro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TextAreaLibroMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(TextAreaLibro);
 
         ButtonAgregarNota.setText("Agregar Nota");
@@ -696,6 +710,20 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
 
     private void ButtonResaltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonResaltarActionPerformed
         // TODO add your handling code here:
+        if (TextAreaLibro.getSelectedText() != null) { // See if they selected something 
+            String selected_text = TextAreaLibro.getSelectedText();
+            //JOptionPane.showMessageDialog(null, selected_text);
+            
+            Highlighter highlighter = TextAreaLibro.getHighlighter();
+            HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+            int p0 = this.TextAreaLibro.getText().indexOf(selected_text);
+            int p1 = p0 + selected_text.length();
+            try {
+                highlighter.addHighlight(p0, p1, painter );
+            } catch (BadLocationException ex) {
+                Logger.getLogger(InternalVistaLectura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_ButtonResaltarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -721,6 +749,10 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
         // TODO add your handling code here:     
         TextAreaLibro.setFont( new Font("Dialog", Font.ROMAN_BASELINE, Integer.parseInt((String)ComboTamañoLetra.getSelectedItem())) ); 
     }//GEN-LAST:event_ComboTamañoLetraActionPerformed
+
+    private void TextAreaLibroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextAreaLibroMouseReleased
+        
+    }//GEN-LAST:event_TextAreaLibroMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
