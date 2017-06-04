@@ -6,7 +6,9 @@
 package Cliente.Controladores;
 
 import Cliente.Cliente;
+import Modelos.Lector;
 import Modelos.Libro;
+import Modelos.Admin; 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -34,5 +36,33 @@ public class Controlador {
     
     public ArrayList consultarLibro(String isbn){
         return cliente.realizarSolicitudServidor("consultarLibro", isbn);
+    }
+    
+ //--------------------------------------- Metodos Lectores ------------------------------------
+    
+    public ArrayList agregarLector(Lector lector) {
+        return cliente.realizarSolicitudServidor("agregarLector", lector);
+    }
+    
+    public ArrayList eliminarLector(String correo) {
+        return cliente.realizarSolicitudServidor("eliminarLector", correo);
+    }
+    
+    public ArrayList consultarLector(String correo){
+        return cliente.realizarSolicitudServidor("consultarLector", correo);
+    }
+    
+ //--------------------------------------- Metodos Administrador ------------------------------------ 
+    
+    public ArrayList agregarAdministrador(Admin administrador) {
+        return cliente.realizarSolicitudServidor("agregarAdministrador", administrador);
+    }
+    
+    public ArrayList eliminarAdministrador(String correo) {
+        return cliente.realizarSolicitudServidor("eliminarAdministrador", correo);
+    }
+    
+    public ArrayList consultarAdministrador(String correo){
+        return cliente.realizarSolicitudServidor("consultarAdministrador", correo);
     }
 }

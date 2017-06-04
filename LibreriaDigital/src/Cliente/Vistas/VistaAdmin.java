@@ -362,6 +362,9 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        InternalAddLector add = new InternalAddLector(controlador_cliente);
+        this.desktopPane.add(add);
+        add.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonDeleteAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteAdminActionPerformed

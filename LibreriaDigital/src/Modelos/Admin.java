@@ -19,6 +19,9 @@ public class Admin implements Serializable{
     private String correo;
     private String password;
     private boolean autorizado;
+    
+    public Admin(){
+    }
 
     public Admin(String nombre, String apellidos, String cargo, String celular, String correo, String password, boolean autorizado) {
         this.nombre = nombre;
@@ -85,6 +88,10 @@ public class Admin implements Serializable{
     public void setAutorizado(boolean autorizado) {
         this.autorizado = autorizado;
     }
+    
+    public String toString(){
+        return "Correo: "+ getCorreo() + " Nombre: "+ getNombre() + " Apellidos: "+ getApellidos(); 
+    } 
  
 
 }

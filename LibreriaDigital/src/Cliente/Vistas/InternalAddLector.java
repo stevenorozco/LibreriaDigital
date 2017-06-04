@@ -5,6 +5,7 @@
  */
 package Cliente.Vistas;
 import Cliente.Controladores.Controlador;
+import Modelos.Lector;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
     /**
      * Creates new form InternalAddLector
      */
-    public InternalAddLector(Controlador cc) {
+    public InternalAddLector(Controlador controlador_cliente) {
         this.controlador_cliente = controlador_cliente;
         initComponents();
     }
@@ -53,6 +54,8 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        ButtonEliminar = new javax.swing.JButton();
+        ButtonConsultar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,42 +93,71 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
+        ButtonEliminar.setText("Eliminar");
+        ButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        ButtonConsultar.setText("Consultar");
+        ButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(fieldEdad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                    .addComponent(fieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldApellidos, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldSaldo))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addGap(64, 64, 64))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(fieldEdad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                        .addComponent(fieldFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fieldCelular, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fieldSaldo))
+                                    .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel9)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(buttonAgregarLector)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonConsultar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,32 +165,32 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
+                    .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(fieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel8)
+                            .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(fieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fieldApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(fieldFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(fieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,9 +199,12 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7)
                             .addComponent(fieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAgregarLector)
-                .addGap(39, 39, 39))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonEliminar)
+                    .addComponent(buttonAgregarLector)
+                    .addComponent(ButtonConsultar))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,35 +220,130 @@ public class InternalAddLector extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean validarCampos(){ 
+         
+        if(fieldEmail.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Email");
+            return false;
+        }
+        
+        if(new String(this.fieldPassword.getPassword()).isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Password");
+            return false;
+        }
+        
+        if(fieldNombre.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Nombre");
+            return false;
+        }
+        
+        if(fieldApellidos.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Apellido");
+            return false;
+        }
+        
+        if(fieldFechaNacimiento.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar una Fecha de Nacimiento");
+            return false;
+        }
+        
+        if(fieldEdad.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar una Edad");
+            return false;
+        }
+        
+        if(fieldSaldo.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Saldo Inicial");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean validarCamposBotones(){ 
+         
+        if(fieldEmail.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Email");
+            return false;
+        }
+        return true;
+    }
+    
     private void buttonAgregarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarLectorActionPerformed
         try{
-            String nombre = this.fieldNombre.getText();
-            String apellidos = this.fieldApellidos.getText();
-            String celular = this.fieldCelular.getText();
-            String fechaNacimiento = this.fieldFechaNacimiento.getText();
-            String email = this.fieldEmail.getText();
-            String password = new String(this.fieldPassword.getPassword());
-            int edad = Integer.parseInt(this.fieldEdad.getText());
-            double saldoInicial = Double.parseDouble(this.fieldSaldo.getText());
-            ArrayList preferencias = new ArrayList();
-            
-            //String resp = controlador_cliente.agregarLector(nombre, apellidos, celular, fechaNacimiento, email, password, preferencias,  edad, saldoInicial);
-            //JOptionPane.showMessageDialog(this, resp);
-        }catch(NumberFormatException nfe){
-            JOptionPane.showMessageDialog(this, "Verifique que los campos esten correctamente diligenciados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            if(validarCampos())
+            {
+            Lector lector = new Lector();
+            lector.setCorreo(this.fieldEmail.getText());
+            lector.setPassword(new String(this.fieldPassword.getPassword()));
+            lector.setNombre(this.fieldNombre.getText());
+            lector.setApellidos(this.fieldApellidos.getText());
+            lector.setFechaNacimiento(this.fieldFechaNacimiento.getText());
+            lector.setCelular(this.fieldCelular.getText());
+            lector.setEdad(Integer.parseInt(this.fieldEdad.getText()));
+            lector.setSaldo(Double.parseDouble(this.fieldSaldo.getText()));
+
+            ArrayList response = controlador_cliente.agregarLector(lector);
+            JOptionPane.showMessageDialog(this, response);
+            }
+           }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Asegurese de que los campos esten correctamente diligenciados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_buttonAgregarLectorActionPerformed
 
+    private void ButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConsultarActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(validarCamposBotones()){
+            String correo = this.fieldEmail.getText();
+            ArrayList response = controlador_cliente.consultarLector(correo);
+            
+            if(response.get(1) != null){
+                Lector lector = (Lector) response.get(1); 
+                JOptionPane.showMessageDialog(this, lector.toString());
+            }
+            else{
+                JOptionPane.showMessageDialog(this, response.get(0));
+            }
+            }   
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_ButtonConsultarActionPerformed
+
+    private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEliminarActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(validarCamposBotones()){
+            String correo = this.fieldEmail.getText();
+            ArrayList response = controlador_cliente.eliminarLector(correo);
+            JOptionPane.showMessageDialog(this, response);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_ButtonEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonConsultar;
+    private javax.swing.JButton ButtonEliminar;
     private javax.swing.JButton buttonAgregarLector;
     private javax.swing.JTextField fieldApellidos;
     private javax.swing.JTextField fieldCelular;

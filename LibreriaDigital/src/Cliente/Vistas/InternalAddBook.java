@@ -324,6 +324,16 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_buttonContenidoActionPerformed
 
+    private boolean validarCamposBotones(){ 
+         
+        if(fieldTitulo.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un Titulo");
+            return false;
+        }
+        return true;
+    }
+    
     private void buttonPortadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPortadaActionPerformed
        
         JFileChooser fileChooser = new JFileChooser();
@@ -360,9 +370,11 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
     private void ButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEliminarActionPerformed
         // TODO add your handling code here:
         try{
+            if(validarCamposBotones()){
             String isbn = this.fieldIsbn.getText();
             ArrayList response = controlador_cliente.eliminarLibro(isbn);
             JOptionPane.showMessageDialog(this, response);
+            }
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -371,6 +383,7 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
     private void ButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarActionPerformed
         // TODO add your handling code here:
         try{
+            if(validarCamposBotones()){
             String isbn = this.fieldIsbn.getText();
             ArrayList response = controlador_cliente.consultarLibro(isbn);
             
@@ -381,7 +394,7 @@ public class InternalAddBook extends javax.swing.JInternalFrame {
             else{
                 JOptionPane.showMessageDialog(this, response.get(0));
             }
-            
+            }   
         }catch(Exception ex){
             ex.printStackTrace();
         }

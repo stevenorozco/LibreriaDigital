@@ -30,6 +30,9 @@ public class Lector implements Serializable {
     private ArrayList misLibros;
     private int librosLeidos;
 
+    public Lector(){
+    }
+    
     public Lector(String nombre, String apellidos, String celular, String fechaNacimiento, String correo, String password, ArrayList preferencias, int edad, double saldo) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -181,4 +184,8 @@ public class Lector implements Serializable {
             return "saldo actual: $" + saldo + "pesos";
         }
     }
+    
+    public String toString(){
+        return "Correo: "+ getCorreo() + " Nombre: "+ getNombre() + " Apellidos: "+ getApellidos(); 
+    } 
 }
