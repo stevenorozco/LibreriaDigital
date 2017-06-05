@@ -606,6 +606,10 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         LabelTituloLibro = new javax.swing.JLabel();
         ComboTamañoLetra = new javax.swing.JComboBox<>();
+        ComboColorLetra = new javax.swing.JComboBox<>();
+        ComboFuenteLetra = new javax.swing.JComboBox<>();
+        LabelColorLetra = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         ButtonResaltar.setText("Resaltar");
         ButtonResaltar.addActionListener(new java.awt.event.ActionListener() {
@@ -653,6 +657,24 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
             }
         });
 
+        ComboColorLetra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Negro ", "Blanco ", "Gris" }));
+        ComboColorLetra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboColorLetraActionPerformed(evt);
+            }
+        });
+
+        ComboFuenteLetra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Times New Roman", "Arial", "Calibri" }));
+        ComboFuenteLetra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboFuenteLetraActionPerformed(evt);
+            }
+        });
+
+        LabelColorLetra.setText("Color Letra");
+
+        jLabel2.setText("Fuente Letra");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -675,9 +697,15 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ComboTamañoLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboColorFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelColorLetra)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboFuenteLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboColorFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboColorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -697,12 +725,20 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelTamañoLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboTamañoLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboColorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelColorLetra))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboColorFondo)))
+                            .addComponent(ComboColorFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboFuenteLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -754,17 +790,51 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_TextAreaLibroMouseReleased
 
+    private void ComboColorLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboColorLetraActionPerformed
+        // TODO add your handling code here:
+        switch ((String)ComboColorLetra.getSelectedItem()){
+            case "Blanco":
+                TextAreaLibro.setForeground(Color.white);
+                break;
+            case "Gris": 
+                TextAreaLibro.setForeground(Color.gray);
+                break; 
+            case "Negro": 
+                TextAreaLibro.setForeground(Color.black);
+                break; 
+        }
+    }//GEN-LAST:event_ComboColorLetraActionPerformed
+
+    private void ComboFuenteLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFuenteLetraActionPerformed
+        // TODO add your handling code here
+        switch ((String)ComboFuenteLetra.getSelectedItem()){
+            case "Times New Roman": 
+                TextAreaLibro.setFont( new Font("Times New Roman", Font.ROMAN_BASELINE, Integer.parseInt((String)ComboTamañoLetra.getSelectedItem())) ); 
+                break;
+            case "Arial": 
+                TextAreaLibro.setFont( new Font("Arial", Font.ROMAN_BASELINE, Integer.parseInt((String)ComboTamañoLetra.getSelectedItem())) ); 
+                break; 
+            case "Calibri": 
+                TextAreaLibro.setFont( new Font("Calibri", Font.ROMAN_BASELINE, Integer.parseInt((String)ComboTamañoLetra.getSelectedItem())) ); 
+                break; 
+        }
+    }//GEN-LAST:event_ComboFuenteLetraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonAgregarNota;
     private javax.swing.JButton ButtonResaltar;
     private javax.swing.JComboBox<String> ComboColorFondo;
+    private javax.swing.JComboBox<String> ComboColorLetra;
+    private javax.swing.JComboBox<String> ComboFuenteLetra;
     private javax.swing.JComboBox<String> ComboTamañoLetra;
+    private javax.swing.JLabel LabelColorLetra;
     private javax.swing.JLabel LabelTamañoLetra;
     private javax.swing.JLabel LabelTituloLibro;
     private javax.swing.JTextArea TextAreaLibro;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

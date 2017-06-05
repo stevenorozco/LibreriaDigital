@@ -13,5 +13,6 @@ package Configuraciones;
 public class ConfiguracionGlobal {
     public static int puerto = 1146;
     public static String host = "localhost";
+    public static int caracteresPorPagina = 3000; 
     
 }
