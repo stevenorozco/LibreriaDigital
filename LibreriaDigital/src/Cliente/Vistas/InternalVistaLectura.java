@@ -751,7 +751,7 @@ public class InternalVistaLectura extends javax.swing.JInternalFrame {
             //JOptionPane.showMessageDialog(null, selected_text);
             
             Highlighter highlighter = TextAreaLibro.getHighlighter();
-            HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+            HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.yellow);
             int p0 = this.TextAreaLibro.getText().indexOf(selected_text);
             int p1 = p0 + selected_text.length();
             try {
