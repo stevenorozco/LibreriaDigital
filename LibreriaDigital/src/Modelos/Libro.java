@@ -27,13 +27,17 @@ public class Libro implements Serializable{
     private boolean bestSeller;
     private int edadMinima;
     private int calificacion;
-    private ArrayList contenido;
+    private String contenido;
+    private ArrayList paginas;
+    private int ultima_pagina_leida;
+    private String[][] notas;
+    //String[][] myStringArray = new String [x][y];    
     
     public Libro(){
        
     }
 
-    public Libro(String isbn, int numeroPaginas, String titulo, String resumen, String autor, ImageIcon imagen, double precio, String categoria, boolean bestSeller, int edadMinima, int calificacion, ArrayList contenido) {
+    public Libro(String isbn, int numeroPaginas, String titulo, String resumen, String autor, ImageIcon imagen, double precio, String categoria, boolean bestSeller, int edadMinima, int calificacion, String contenido) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.resumen = resumen;
@@ -45,7 +49,8 @@ public class Libro implements Serializable{
         this.edadMinima = edadMinima;
         this.calificacion = calificacion;
         this.contenido = contenido;
-        this.numeroPaginas = contenido.size();
+        
+        //#this.numeroPaginas = contenido.size();
     }
     //-------METODOS GET---------
     public String getIsbn() {
@@ -92,7 +97,7 @@ public class Libro implements Serializable{
         return calificacion;
     }
 
-    public ArrayList getContenido() {
+    public String getContenido() {
         return contenido;
     }
     
@@ -141,15 +146,34 @@ public class Libro implements Serializable{
         this.calificacion = calificacion;
     }
 
-    public void setContenido(ArrayList contenido) {
+    public void setContenido(String contenido) {
         this.contenido = contenido;
+        this.setPaginas();
+    }
+    
+    public void agregarNota(int pagina, String nota){
+        notas[pagina][1] = nota; 
+    }
+    
+    public String[][] getNotas(){
+        return notas;
     }
     
     public String toString(){
         return "Isbn: "+ getIsbn() + " Titulo: "+ getTitulo(); 
     }
     
-    public static String contenidoLibro(){
+    public  ArrayList getPaginas(){
+        return paginas;
+    }
+    
+    public void setPaginas(){
+        this.paginas = convertirContenidoAPaginas(this.getContenido(), 20);
+        this.numeroPaginas = paginas.size();
+        this.notas = new String[this.numeroPaginas][100];
+    }
+    
+    public static String contenidoLibroEjemplo(){
         String contenido = "Sombras de desesperación" +
 
 "Hubo presagios funestos desde el principio.\n" +
@@ -327,9 +351,10 @@ public class Libro implements Serializable{
     }
     
     public static ArrayList convertirContenidoAPaginas(String contenido, int num_lineas_por_pagina){
-         
-        ArrayList paginas = new ArrayList(); 
+        
         String lines[] = contenido.split("\\r?\\n");
+        ArrayList paginas = new ArrayList(); 
+        
         
         String pagina = "";
         for (int i = 0 ; i < lines.length ; i++) {
@@ -341,18 +366,11 @@ public class Libro implements Serializable{
                 paginas.add(pagina);
                 pagina = "";
             }
-            //System.out.println("Elemento en indice " + i + ": " + lines[i]);
+            
         }
         return paginas;
     
     }
     
-    
-    public static void main (String[] args){
-        
-        String contenido = contenidoLibro();
-        ArrayList paginas = convertirContenidoAPaginas(contenido, 20);
-        System.out.print(paginas.size());
-        
-    }
+  
 }
